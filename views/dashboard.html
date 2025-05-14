@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/auth.css">
+    <style>
+        .dashboard-container {
+            max-width: 800px;
+        }
+        
+        .user-info {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .user-info h2 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        
+        .user-details p {
+            margin-bottom: 0.5rem;
+            color: #555;
+        }
+        
+        .user-details strong {
+            color: #333;
+        }
+        
+        .actions {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .logout-btn {
+            background-color: #dc3545;
+            width: auto;
+            padding: 0.75rem 1.5rem;
+        }
+        
+        .logout-btn:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container dashboard-container">
+        <h1>Bienvenido al Dashboard</h1>
+        
+        <div class="user-info">
+            <h2>Información de tu cuenta</h2>
+            <div class="user-details" id="userDetails">
+                <p><strong>Usuario:</strong> <span id="username"></span></p>
+                <p><strong>Email:</strong> <span id="email"></span></p>
+                <p><strong>Fecha de registro:</strong> <span id="registerDate"></span></p>
+            </div>
+        </div>
+        
+        <div class="actions">
+            <button id="logoutBtn" class="logout-btn">Cerrar Sesión</button>
+        </div>
+        
+        <div id="message" class="message"></div>
+    </div>
+    
+    <script src="/js/dashboard.js"></script>
+</body>
+</html>
