@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Recuperar Contraseña</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <main class="auth-page">
+    <div class="auth-card">
+      <h1 class="auth-card__title">Recuperar Contraseña</h1>
+      <p class="auth-card__subtitle">
+        Introduce tu correo y te enviaremos un enlace para restablecerla
+      </p>
+
+      <form id="forgot-form" class="auth-form">
+        <div class="auth-form__group">
+          <label for="email" class="auth-form__label">Correo electrónico</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="auth-form__input"
+            placeholder="usuario@ejemplo.com"
+            required
+          >
+        </div>
+        <button type="submit" class="auth-form__button">Enviar enlace</button>
+      </form>
+
+      <p id="msg" class="auth-form__msg"></p>
+      <p class="auth-card__link">
+        <a href="/login">← Volver al inicio de sesión</a>
+      </p>
+    </div>
+  </main>
+
+  <script>
+    const form = document.getElementById('forgot-form');
+    const msgEl = document.getElementById('msg');
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      console.log('Enviando solicitud de recuperación para:', email);
+
+      try {
+        const res = await fetch('/api/auth/forgot-password', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+        const data = await res.json();
+        console.log('Respuesta server:', data);
+        msgEl.textContent = data.message || data.msg || data.error;
+        msgEl.classList.add('auth-form__msg--visible');
+      } catch (error) {
+        console.error('Error en fetch:', error);
+        msgEl.textContent = 'Ocurrió un error, inténtalo más tarde';
+        msgEl.classList.add('auth-form__msg--visible');
+      }
+    });
+  </script>
+</body>
+</html>
